@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as ARouteImport } from './routes/a'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as DRouteImport } from './routes/d'
+import { Route as GRouteImport } from './routes/g'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as MovieRouteImport } from './routes/movie'
+import { Route as PlayRouteImport } from './routes/play'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as SRouteImport } from './routes/s'
+import { Route as TvRouteImport } from './routes/tv'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ARoute = ARouteImport.update({
+  id: '/a',
+  path: '/a',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DRoute = DRouteImport.update({
+  id: '/d',
+  path: '/d',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GRoute = GRouteImport.update({
+  id: '/g',
+  path: '/g',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MovieRoute = MovieRouteImport.update({
+  id: '/movie',
+  path: '/movie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayRoute = PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SRoute = SRouteImport.update({
+  id: '/s',
+  path: '/s',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TvRoute = TvRouteImport.update({
+  id: '/tv',
+  path: '/tv',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/a': typeof ARoute
+  '/chat': typeof ChatRoute
+  '/d': typeof DRoute
+  '/g': typeof GRoute
+  '/media': typeof MediaRoute
+  '/movie': typeof MovieRoute
+  '/play': typeof PlayRoute
+  '/profile': typeof ProfileRoute
+  '/s': typeof SRoute
+  '/tv': typeof TvRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/a': typeof ARoute
+  '/chat': typeof ChatRoute
+  '/d': typeof DRoute
+  '/g': typeof GRoute
+  '/media': typeof MediaRoute
+  '/movie': typeof MovieRoute
+  '/play': typeof PlayRoute
+  '/profile': typeof ProfileRoute
+  '/s': typeof SRoute
+  '/tv': typeof TvRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/a': typeof ARoute
+  '/chat': typeof ChatRoute
+  '/d': typeof DRoute
+  '/g': typeof GRoute
+  '/media': typeof MediaRoute
+  '/movie': typeof MovieRoute
+  '/play': typeof PlayRoute
+  '/profile': typeof ProfileRoute
+  '/s': typeof SRoute
+  '/tv': typeof TvRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$'
+    | '/a'
+    | '/chat'
+    | '/d'
+    | '/g'
+    | '/media'
+    | '/movie'
+    | '/play'
+    | '/profile'
+    | '/s'
+    | '/tv'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/$'
+    | '/a'
+    | '/chat'
+    | '/d'
+    | '/g'
+    | '/media'
+    | '/movie'
+    | '/play'
+    | '/profile'
+    | '/s'
+    | '/tv'
+  id:
+    | '__root__'
+    | '/'
+    | '/$'
+    | '/a'
+    | '/chat'
+    | '/d'
+    | '/g'
+    | '/media'
+    | '/movie'
+    | '/play'
+    | '/profile'
+    | '/s'
+    | '/tv'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
+  ARoute: typeof ARoute
+  ChatRoute: typeof ChatRoute
+  DRoute: typeof DRoute
+  GRoute: typeof GRoute
+  MediaRoute: typeof MediaRoute
+  MovieRoute: typeof MovieRoute
+  PlayRoute: typeof PlayRoute
+  ProfileRoute: typeof ProfileRoute
+  SRoute: typeof SRoute
+  TvRoute: typeof TvRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +195,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a': {
+      id: '/a'
+      path: '/a'
+      fullPath: '/a'
+      preLoaderRoute: typeof ARouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/d': {
+      id: '/d'
+      path: '/d'
+      fullPath: '/d'
+      preLoaderRoute: typeof DRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/g': {
+      id: '/g'
+      path: '/g'
+      fullPath: '/g'
+      preLoaderRoute: typeof GRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movie': {
+      id: '/movie'
+      path: '/movie'
+      fullPath: '/movie'
+      preLoaderRoute: typeof MovieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/play': {
+      id: '/play'
+      path: '/play'
+      fullPath: '/play'
+      preLoaderRoute: typeof PlayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s': {
+      id: '/s'
+      path: '/s'
+      fullPath: '/s'
+      preLoaderRoute: typeof SRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tv': {
+      id: '/tv'
+      path: '/tv'
+      fullPath: '/tv'
+      preLoaderRoute: typeof TvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
+  ARoute: ARoute,
+  ChatRoute: ChatRoute,
+  DRoute: DRoute,
+  GRoute: GRoute,
+  MediaRoute: MediaRoute,
+  MovieRoute: MovieRoute,
+  PlayRoute: PlayRoute,
+  ProfileRoute: ProfileRoute,
+  SRoute: SRoute,
+  TvRoute: TvRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

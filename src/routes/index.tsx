@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { SearchBar } from "@/components/SearchBar";
+import { QuickLinks } from "@/components/QuickLinks";
+import { taglines } from "@/data/taglines";
+import { randomTagline } from "@/lib/site-helpers";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Reds Exploit Corner" },
+      { name: "description", content: "Games, apps, and media — all in one place." },
+      { property: "og:title", content: "Reds Exploit Corner" },
+      { property: "og:description", content: "Games, apps, and media — all in one place." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
+  const [tagline, setTagline] = useState(taglines[0]);
+
+  useEffect(() => {
+    setTagline(randomTagline(taglines));
+  }, []);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center px-4 pt-28 pb-24">
+      <h1 className="text-center text-5xl font-extrabold tracking-tight text-foreground sm:text-7xl">
+        Reds Exploit Corner
+      </h1>
+      <p className="mt-4 text-center text-lg text-muted-foreground">{tagline}</p>
+
+      <div className="mt-10 w-full px-4">
+        <SearchBar placeholder="Search Google or Enter a Link" />
+      </div>
+
+      <div className="mt-10 w-full">
+        <QuickLinks />
+      </div>
+    </main>
   );
 }

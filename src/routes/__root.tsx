@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Navbar } from "@/components/Navbar";
+import { SiteFooter } from "@/components/SiteFooter";
+import { themeScript } from "@/components/ThemeScript";
+import { applyTabCloak, loadSettings } from "@/lib/settings";
+import { applyTheme, getStoredTheme, type ThemeId } from "@/lib/theme";
 
 function NotFoundComponent() {
   return (
@@ -77,22 +82,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "author", content: "Rednotsus" },
+      { name: "description", content: "55GMS - Reds Exploit Corner" },
+      { property: "og:title", content: "Reds Exploit Corner" },
+      { property: "og:description", content: "Games, apps, and media — all in one place." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [{ type: "text/javascript", children: themeScript }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -102,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -117,10 +118,29 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    const settings = loadSettings();
+    applyTheme((settings.theme as ThemeId) ?? getStoredTheme());
+    applyTabCloak(settings.tab);
+
+    const panicKey = settings.panicKey || "`";
+    const panicLink = settings.panicLink || "https://google.com";
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === panicKey && panicLink && window.top) {
+        window.top.location.href = panicLink;
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen bg-background text-foreground">
+        <Navbar />
+        <Outlet />
+        <SiteFooter />
+      </div>
     </QueryClientProvider>
   );
 }

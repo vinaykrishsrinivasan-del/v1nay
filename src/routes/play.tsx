@@ -29,9 +29,8 @@ function PlayPage() {
   if (url) {
     src = url;
   } else if (link) {
-    src = `https://55gms.com/misc/play/?title=${encodeURIComponent(title ?? "")}&author=${encodeURIComponent(
-      author ?? "",
-    )}&link=${encodeURIComponent(link)}`;
+    // Load the game files directly instead of the reference site's ad-wrapped player.
+    src = `https://55gms.com/misc/${encodeURIComponent(link)}/index.html`;
   }
 
   const displayTitle = title || "Game";

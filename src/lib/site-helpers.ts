@@ -13,9 +13,9 @@ export function resolveGameHref(game: GameItem): string {
     if (game.url.startsWith("http")) return `/play?url=${encodeURIComponent(game.url)}`;
     return `/play?url=${encodeURIComponent(`https://55gms.com${game.url.startsWith("/") ? "" : "/"}${game.url}`)}`;
   }
-  if (game.author) {
-    const gameLink = game.image.split("/").filter(Boolean).at(-2) ?? "";
-    return `/play?title=${encodeURIComponent(game.name)}&author=${encodeURIComponent(game.author)}&link=${encodeURIComponent(gameLink)}`;
+  const gameLink = game.image.split("/").filter(Boolean).at(-2) ?? "";
+  if (gameLink) {
+    return `/play?title=${encodeURIComponent(game.name)}&author=${encodeURIComponent(game.author ?? "")}&link=${encodeURIComponent(gameLink)}`;
   }
   return "#";
 }

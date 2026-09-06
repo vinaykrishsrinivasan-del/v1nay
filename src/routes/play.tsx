@@ -46,14 +46,29 @@ function PlayPage() {
           Back
         </Link>
         <h1 className="text-lg font-semibold text-card-foreground">{displayTitle}</h1>
+        {author ? <span className="text-sm text-muted-foreground">by {author}</span> : null}
+        {src ? (
+          <button
+            type="button"
+            onClick={() => {
+              const el = document.getElementById("game-frame");
+              el?.requestFullscreen?.();
+            }}
+            className="ml-auto inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-sm font-medium text-card-foreground transition-colors hover:bg-muted"
+          >
+            <Maximize className="h-4 w-4" />
+            Fullscreen
+          </button>
+        ) : null}
       </div>
       {src ? (
         <iframe
+          id="game-frame"
           src={src}
           title={displayTitle}
-          className="w-full flex-1 border-0"
-          allow="fullscreen"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          className="min-h-[70vh] w-full flex-1 border-0 bg-black"
+          allow="fullscreen; autoplay; gamepad; clipboard-write; cross-origin-isolated"
+          allowFullScreen
         />
       ) : (
         <div className="flex flex-1 items-center justify-center text-muted-foreground">

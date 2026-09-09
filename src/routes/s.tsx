@@ -57,34 +57,6 @@ function SettingsPage() {
     if ("tab" in patch) applyTabCloak(next.tab);
   }
 
-  function handleAboutBlank() {
-    const enabled = !settings.aboutBlank;
-    update({ aboutBlank: enabled });
-    if (enabled) openAboutBlank();
-  }
-
-  function openAboutBlank() {
-    if (typeof window === "undefined") return;
-    const popup = window.open("about:blank", "_blank");
-    if (!popup || popup.closed) {
-      alert("Please allow popups and redirects for about:blank cloak to work.");
-      return;
-    }
-    popup.document.title = "My Drive - Google Drive";
-    const link = popup.document.createElement("link");
-    link.rel = "icon";
-    link.href = "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png";
-    popup.document.head.appendChild(link);
-    const iframe = popup.document.createElement("iframe");
-    iframe.src = window.location.href;
-    iframe.style.position = "fixed";
-    iframe.style.inset = "0";
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    popup.document.body.appendChild(iframe);
-  }
-
   function handleImport() {
     const ok = importSettings(importText);
     setImportError(!ok);

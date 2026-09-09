@@ -122,16 +122,6 @@ function RootComponent() {
     const settings = loadSettings();
     applyTheme((settings.theme as ThemeId) ?? getStoredTheme());
     applyTabCloak(settings.tab);
-
-    const panicKey = settings.panicKey || "`";
-    const panicLink = settings.panicLink || "https://google.com";
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === panicKey && panicLink && window.top) {
-        window.top.location.href = panicLink;
-      }
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
   }, []);
 
   return (

@@ -134,53 +134,6 @@ function SettingsPage() {
           </div>
         </section>
 
-        {/* About:blank */}
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="text-xl font-semibold text-card-foreground">About:blank</h2>
-          <p className="text-sm text-muted-foreground">Open the site in a hidden tab.</p>
-          <div className="mt-4 flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Switch
-                id="about-blank"
-                checked={settings.aboutBlank ?? false}
-                onCheckedChange={handleAboutBlank}
-              />
-              <Label htmlFor="about-blank">Enable popup mode</Label>
-            </div>
-            <Button variant="outline" onClick={openAboutBlank}>
-              Open popup
-            </Button>
-          </div>
-        </section>
-
-        {/* Panic key */}
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="text-xl font-semibold text-card-foreground"> Panic key</h2>
-          <p className="text-sm text-muted-foreground">Set a quick exit key and destination.</p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <Label htmlFor="panic-key">Key</Label>
-              <Input
-                id="panic-key"
-                value={settings.panicKey ?? ""}
-                onChange={(e) => update({ panicKey: e.target.value })}
-                placeholder="e.g. `"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="panic-link">Exit URL</Label>
-              <Input
-                id="panic-link"
-                value={settings.panicLink ?? ""}
-                onChange={(e) => update({ panicLink: e.target.value })}
-                placeholder="https://google.com"
-                className="mt-1"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Save data */}
         <section className="rounded-2xl border border-border bg-card p-6">
           <h2 className="text-xl font-semibold text-card-foreground">Save data</h2>

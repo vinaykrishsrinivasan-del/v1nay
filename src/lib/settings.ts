@@ -6,9 +6,6 @@ export interface TabCloak {
 export interface SiteSettings {
   theme?: string;
   tab?: TabCloak;
-  aboutBlank?: boolean;
-  panicKey?: string;
-  panicLink?: string;
 }
 
 const STORAGE_KEY = "gms-settings-v1";

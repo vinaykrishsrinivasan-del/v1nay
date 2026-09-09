@@ -57,34 +57,6 @@ function SettingsPage() {
     if ("tab" in patch) applyTabCloak(next.tab);
   }
 
-  function handleAboutBlank() {
-    const enabled = !settings.aboutBlank;
-    update({ aboutBlank: enabled });
-    if (enabled) openAboutBlank();
-  }
-
-  function openAboutBlank() {
-    if (typeof window === "undefined") return;
-    const popup = window.open("about:blank", "_blank");
-    if (!popup || popup.closed) {
-      alert("Please allow popups and redirects for about:blank cloak to work.");
-      return;
-    }
-    popup.document.title = "My Drive - Google Drive";
-    const link = popup.document.createElement("link");
-    link.rel = "icon";
-    link.href = "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png";
-    popup.document.head.appendChild(link);
-    const iframe = popup.document.createElement("iframe");
-    iframe.src = window.location.href;
-    iframe.style.position = "fixed";
-    iframe.style.inset = "0";
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    popup.document.body.appendChild(iframe);
-  }
-
   function handleImport() {
     const ok = importSettings(importText);
     setImportError(!ok);
@@ -156,53 +128,6 @@ function SettingsPage() {
                 value={settings.tab?.icon ?? ""}
                 onChange={(e) => update({ tab: { ...settings.tab, icon: e.target.value } })}
                 placeholder="https://example.com/favicon.ico"
-                className="mt-1"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* About:blank */}
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="text-xl font-semibold text-card-foreground">About:blank</h2>
-          <p className="text-sm text-muted-foreground">Open the site in a hidden tab.</p>
-          <div className="mt-4 flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Switch
-                id="about-blank"
-                checked={settings.aboutBlank ?? false}
-                onCheckedChange={handleAboutBlank}
-              />
-              <Label htmlFor="about-blank">Enable popup mode</Label>
-            </div>
-            <Button variant="outline" onClick={openAboutBlank}>
-              Open popup
-            </Button>
-          </div>
-        </section>
-
-        {/* Panic key */}
-        <section className="rounded-2xl border border-border bg-card p-6">
-          <h2 className="text-xl font-semibold text-card-foreground"> Panic key</h2>
-          <p className="text-sm text-muted-foreground">Set a quick exit key and destination.</p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <Label htmlFor="panic-key">Key</Label>
-              <Input
-                id="panic-key"
-                value={settings.panicKey ?? ""}
-                onChange={(e) => update({ panicKey: e.target.value })}
-                placeholder="e.g. `"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="panic-link">Exit URL</Label>
-              <Input
-                id="panic-link"
-                value={settings.panicLink ?? ""}
-                onChange={(e) => update({ panicLink: e.target.value })}
-                placeholder="https://google.com"
                 className="mt-1"
               />
             </div>

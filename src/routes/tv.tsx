@@ -40,7 +40,7 @@ function TvPage() {
           title="TV player"
           className="w-full flex-1 border-0"
           allow="fullscreen"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          sandbox="allow-scripts allow-same-origin allow-forms"
         />
       ) : (
         <div className="flex flex-1 items-center justify-center text-muted-foreground">
